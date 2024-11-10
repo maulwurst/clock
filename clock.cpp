@@ -33,16 +33,20 @@ void timer(chrono::microseconds tick){
   auto elapsed_time = duration_cast<microseconds>(end_time-start_time).count();
 // check if we really slept for 1 tick if not sleep for the remaining time should smooth out clock jitters
   auto remaining_time = tick.count() - elapsed_time;
+  cout << "tick" << endl;
   if ( remaining_time >0){
     this_thread::sleep_for(microseconds(remaining_time));
+    cout << "clock fixed" << endl;
+
   }
+
 }
 }
 
  int main(){
       float BPM = 60;
       auto tick = bpm_to_midi_clock_ticks(BPM);
+      timer(tick);
  return 0;
 
 }
-
